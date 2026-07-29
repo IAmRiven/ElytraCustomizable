@@ -1,0 +1,18 @@
+# Cooldown del firework al usarlo mientras planeas con elytra.
+# 20 ticks = 1 segundo.
+firework-cooldown-ticks: 8
+
+flame-particles:
+  enabled: true
+  # Opciones típicas: FLAME, SMALL_FLAME, SOUL_FIRE_FLAME
+  type: FLAME
+  # Cantidad de partículas por ejecución del task por jugador.
+  count: 6
+  # Dispersión lateral de las partículas.
+  spread: 0.25
+  # Velocidad visual de la partícula.
+  speed: 0.01
+  # Qué tan atrás del jugador se dibujan.
+  backward-offset: 0.9
+  # Altura relativa respecto al jugador.
+  vertical-offset: 0.35

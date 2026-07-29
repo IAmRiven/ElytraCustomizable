@@ -1,0 +1,16 @@
+name: ElytraCustomizable
+version: 1.0.0
+main: me.elytracustomizable.ElytraCustomizablePlugin
+api-version: '1.21'
+author: IAmRiven
+description: Permite personalizar el cooldown del firework con elytra y mostrar partículas al planear.
+commands:
+  elytracustomizable:
+    description: Comando principal de ElytraCustomizable.
+    usage: /<command> reload
+    aliases: [ecustom, elytrareload]
+    permission: elytracustomizable.reload
+permissions:
+  elytracustomizable.reload:
+    description: Permite recargar la configuración del plugin ElytraCustomizable.
+    default: op
