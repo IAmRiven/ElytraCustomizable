@@ -1,7 +1,7 @@
 package me.elytracustomizable.listener;
 
+import io.papermc.paper.event.player.PlayerItemCooldownEvent;
 import me.elytracustomizable.ElytraCustomizablePlugin;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,8 +40,20 @@ public final class ElytraListener implements Listener {
         if (!player.isGliding()) {
             return;
         }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onPlayerItemCooldown(PlayerItemCooldownEvent event) {
+        if (event.getType() != Material.FIREWORK_ROCKET) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+        if (!player.isGliding()) {
+            return;
+        }
 
         int cooldownTicks = Math.max(0, plugin.getConfig().getInt("firework-cooldown-ticks", 15));
-        Bukkit.getScheduler().runTask(plugin, () -> player.setCooldown(Material.FIREWORK_ROCKET, cooldownTicks));
+        event.setCooldown(cooldownTicks);
     }
 }
