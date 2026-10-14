@@ -1,16 +1,16 @@
-name: ElytraCustomizable
-version: 1.0.0
-main: me.elytracustomizable.ElytraCustomizablePlugin
+name: KastelUtils
+version: 26.8.1
+main: me.KastelUtils.KastelUtils
 api-version: '1.21'
 author: IAmRiven
 description: Permite personalizar el cooldown del firework con elytra y mostrar partículas al planear.
 commands:
-  elytracustomizable:
-    description: Comando principal de ElytraCustomizable.
+  kastelutils:
+    description: Comando principal de KastelUtils.
     usage: /<command> reload
-    aliases: [ecustom, elytrareload]
-    permission: elytracustomizable.reload
+    aliases: [kutils, kastelreload]
+    permission: kastelutils.reload
 permissions:
-  elytracustomizable.reload:
-    description: Permite recargar la configuración del plugin ElytraCustomizable.
+  kastelutils.reload:
+    description: Permite recargar la configuración del plugin KastelUtils.
     default: op

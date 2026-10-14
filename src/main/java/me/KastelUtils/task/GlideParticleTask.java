@@ -1,6 +1,6 @@
-package me.elytracustomizable.task;
+package me.KastelUtils.task;
 
-import me.elytracustomizable.ElytraCustomizablePlugin;
+import me.KastelUtils.KastelUtils;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
@@ -12,9 +12,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public final class GlideParticleTask extends BukkitRunnable {
 
-    private final ElytraCustomizablePlugin plugin;
+    private final KastelUtils plugin;
 
-    public GlideParticleTask(ElytraCustomizablePlugin plugin) {
+    public GlideParticleTask(KastelUtils plugin) {
         this.plugin = plugin;
     }
 

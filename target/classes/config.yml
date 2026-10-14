@@ -16,3 +16,8 @@ flame-particles:
   backward-offset: 0.9
   # Altura relativa respecto al jugador.
   vertical-offset: 0.35
+
+# Cooldown del tridente al usar impulso de Riptide.
+# Se aplica cuando el jugador puede impulsarse con agua/lluvia.
+# 20 ticks = 1 segundo.
+trident-riptide-cooldown-ticks: 20

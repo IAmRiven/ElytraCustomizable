@@ -1,6 +1,6 @@
-package me.elytracustomizable.command;
+package me.KastelUtils.command;
 
-import me.elytracustomizable.ElytraCustomizablePlugin;
+import me.KastelUtils.KastelUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,13 +10,13 @@ import org.bukkit.command.TabCompleter;
 import java.util.Collections;
 import java.util.List;
 
-public final class ElytraCustomizableCommand implements CommandExecutor, TabCompleter {
+public final class KastelUtilsCommand implements CommandExecutor, TabCompleter {
 
-    private static final String RELOAD_PERMISSION = "elytracustomizable.reload";
+    private static final String RELOAD_PERMISSION = "kastelutils.reload";
 
-    private final ElytraCustomizablePlugin plugin;
+    private final KastelUtils plugin;
 
-    public ElytraCustomizableCommand(ElytraCustomizablePlugin plugin) {
+    public KastelUtilsCommand(KastelUtils plugin) {
         this.plugin = plugin;
     }
 
@@ -38,7 +38,7 @@ public final class ElytraCustomizableCommand implements CommandExecutor, TabComp
         }
 
         plugin.reloadConfig();
-        sender.sendMessage(ChatColor.GREEN + "La configuración de ElytraCustomizable ha sido recargada.");
+        sender.sendMessage(ChatColor.GREEN + "La configuración de KastelUtils ha sido recargada.");
         return true;
     }
 

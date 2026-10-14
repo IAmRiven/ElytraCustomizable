@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.elytracustomizable</groupId>
-    <artifactId>ElytraCustomizable</artifactId>
-    <version>1.0.0</version>
+    <groupId>me.KastelUtils</groupId>
+    <artifactId>KastelUtils</artifactId>
+    <version>26.8.1</version>
     <packaging>jar</packaging>
 
-    <name>ElytraCustomizable</name>
+    <name>KastelUtils</name>
     <description>Plugin de Paper para personalizar el cooldown de fireworks con elytra y mostrar partículas al volar.</description>
 
     <properties>
