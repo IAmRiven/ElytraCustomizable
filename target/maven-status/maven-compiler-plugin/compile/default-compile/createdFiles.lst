@@ -1,4 +1,6 @@
-me\KastelUtils\command\KastelUtilsCommand.class
-me\KastelUtils\listener\ElytraListener.class
 me\KastelUtils\task\GlideParticleTask.class
 me\KastelUtils\KastelUtils.class
+me\KastelUtils\command\KastelUtilsCommand.class
+me\KastelUtils\listener\ElytraListener.class
+me\KastelUtils\changelog\ChangelogManager.class
+me\KastelUtils\changelog\ChangelogListener.class

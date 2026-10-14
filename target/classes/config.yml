@@ -21,3 +21,8 @@ flame-particles:
 # Se aplica cuando el jugador puede impulsarse con agua/lluvia.
 # 20 ticks = 1 segundo.
 trident-riptide-cooldown-ticks: 20
+
+# Plantilla y datos que aparecen en los libros de changelog.
+changelog:
+  book-author: KastelCraft
+  minecraft-version: "26.2"

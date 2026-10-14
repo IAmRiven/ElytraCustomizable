@@ -7,10 +7,15 @@ description: Permite personalizar el cooldown del firework con elytra y mostrar 
 commands:
   kastelutils:
     description: Comando principal de KastelUtils.
-    usage: /<command> reload
+    usage: /<command> reload|changelog <versión|list|latest|view>
     aliases: [kutils, kastelreload]
-    permission: kastelutils.reload
 permissions:
   kastelutils.reload:
     description: Permite recargar la configuración del plugin KastelUtils.
+    default: op
+  kastelutils.changelog:
+    description: Permite crear y publicar changelogs del servidor.
+    default: op
+  kastelutils.changelog.view:
+    description: Permite listar y consultar changelogs publicados.
     default: op
