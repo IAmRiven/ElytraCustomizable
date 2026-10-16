@@ -1,0 +1,40 @@
+command:
+  usage: "&eUso: /{label} reload|changelog <versión|list|latest|view> [versión]"
+  unknown: "&cSubcomando desconocido. Usa /{label} reload o changelog <versión>."
+  reload: "&aLa configuración de KastelUtils ha sido recargada."
+  no-permission: "&cNo tienes permiso para usar este comando."
+
+changelog:
+  create:
+    console-only-player: "&cEste subcomando solo puede usarse dentro del servidor."
+    no-permission: "&cNo tienes permiso para crear changelogs."
+    auto-console-only-player: "&cEste subcomando solo puede usarse dentro del servidor."
+    auto-no-permission: "&cNo tienes permiso para crear changelogs."
+    manual-usage: "&eUso: /{label} changelog <versión>"
+    manual-created: "&aSe ha entregado el libro del changelog. Ábrelo con clic derecho, escribe los cambios y ciérralo para guardarlo."
+    created: "&aSe ha creado el changelog {version} automáticamente."
+    instructions: "&aÁbrelo con clic derecho, escribe los cambios y ciérralo para guardarlo."
+  edit:
+    usage: "&eUso: /{label} changelog edit <versión>"
+    console-only-player: "&cEste subcomando solo puede usarse dentro del servidor."
+    no-permission: "&cNo tienes permiso para editar changelogs."
+    not-found: "&cNo existe el changelog {version}."
+    started: "&aEditando el changelog {version}. Los cambios se guardarán al cerrar o firmar el libro."
+  view:
+    console-only-player: "&cSolo un jugador puede abrir el libro del changelog."
+    no-permission: "&cNo tienes permiso para consultar changelogs manualmente."
+    usage: "&eUso: /{label} changelog view <versión>"
+    empty: "&eTodavía no hay ningún changelog publicado."
+    not-found: "&cNo existe el changelog {version}."
+  list:
+    empty: "&eTodavía no hay changelogs guardados."
+    header: "&6Changelogs disponibles:"
+    entry: "&7- &f{version}{latest}"
+    latest: "&a (último)"
+  open:
+    console-only-player: "&cSolo un jugador puede abrir el changelog."
+  join:
+    prefix: "&8[&6&lKC&8] &fSi quieres ver la lista de novedades, "
+    click: "&ehaz clic aquí para verla"
+    suffix: "&f."
+    hover: "&fAbrir el último changelog"

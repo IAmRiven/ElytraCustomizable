@@ -1,40 +1,45 @@
 package me.KastelUtils.changelog;
 
 import me.KastelUtils.KastelUtils;
+import me.KastelUtils.message.MessageManager;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerEditBookEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 public final class ChangelogListener implements Listener {
 
     private final ChangelogManager manager;
     private final KastelUtils plugin;
-    private final Map<UUID, Long> lastPlayedBeforeLogin = new ConcurrentHashMap<>();
+    private final MessageManager messages;
 
-    public ChangelogListener(KastelUtils plugin, ChangelogManager manager) {
+    public ChangelogListener(KastelUtils plugin, ChangelogManager manager, MessageManager messages) {
         this.plugin = plugin;
         this.manager = manager;
-    }
-
-    @EventHandler
-    public void onPlayerLogin(PlayerLoginEvent event) {
-        lastPlayedBeforeLogin.put(event.getPlayer().getUniqueId(), event.getPlayer().getLastPlayed());
+        this.messages = messages;
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        Long storedLastPlayed = lastPlayedBeforeLogin.remove(event.getPlayer().getUniqueId());
-        long lastPlayed = storedLastPlayed == null ? 0L : storedLastPlayed;
-        plugin.getServer().getScheduler().runTaskLater(plugin,
-                () -> manager.openLatestIfNeeded(event.getPlayer(), lastPlayed), 20L);
+        Player player = event.getPlayer();
+        if (!manager.hasLatestChangelog()) {
+            return;
+        }
+
+        Component message = messages.component("changelog.join.prefix", Map.of())
+                .append(messages.component("changelog.join.click", Map.of())
+                        .clickEvent(ClickEvent.runCommand("/kastelutils changelog open"))
+                        .hoverEvent(HoverEvent.showText(messages.component("changelog.join.hover", Map.of()))))
+                .append(messages.component("changelog.join.suffix", Map.of()));
+        player.sendMessage(message);
     }
 
     @EventHandler

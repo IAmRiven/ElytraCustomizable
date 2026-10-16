@@ -26,12 +26,14 @@ public final class ChangelogManager {
 
     private final KastelUtils plugin;
     private final NamespacedKey versionKey;
+    private final NamespacedKey seenVersionKey;
     private final File changelogsFile;
     private YamlConfiguration changelogs;
 
     public ChangelogManager(KastelUtils plugin) {
         this.plugin = plugin;
         this.versionKey = new NamespacedKey(plugin, "changelog_version");
+        this.seenVersionKey = new NamespacedKey(plugin, "changelog_seen_version");
         this.changelogsFile = new File(plugin.getDataFolder(), "changelogs.yml");
         load();
     }
@@ -44,6 +46,10 @@ public final class ChangelogManager {
     }
 
     public ItemStack createEditorBook(String version) {
+        return createEditorBook(version, false);
+    }
+
+    public ItemStack createEditorBook(String version, boolean editExisting) {
         ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
         if (meta == null) {
@@ -53,9 +59,18 @@ public final class ChangelogManager {
         meta.setTitle("Changelog " + version);
         meta.setAuthor(plugin.getConfig().getString("changelog.book-author", "KastelCraft"));
         meta.getPersistentDataContainer().set(versionKey, PersistentDataType.STRING, version);
-        meta.setPages(createTemplate(version));
+        List<String> pages = editExisting ? getPages(version) : Collections.emptyList();
+        meta.setPages(pages.isEmpty() ? createTemplate(version) : pages);
         book.setItemMeta(meta);
         return book;
+    }
+
+    private List<String> getPages(String version) {
+        String storageKey = findStorageKey(version);
+        if (storageKey == null) {
+            return Collections.emptyList();
+        }
+        return new ArrayList<>(changelogs.getStringList("changelogs." + storageKey + ".pages"));
     }
 
     public boolean saveFromBook(ItemStack book) {
@@ -103,22 +118,23 @@ public final class ChangelogManager {
         return saveFromBook(editedBook);
     }
 
-    public void openLatestIfNeeded(Player player, long lastPlayedBeforeCurrentLogin) {
+    public boolean hasLatestChangelog() {
+        return getLatestVersion() != null;
+    }
+
+    public void openLatest(Player player) {
         String latestVersion = getLatestVersion();
-        if (latestVersion == null || getUpdatedAt(latestVersion) <= lastPlayedBeforeCurrentLogin) {
+        if (latestVersion == null) {
             return;
         }
 
         ItemStack book = createViewBook(latestVersion);
+        player.getPersistentDataContainer().set(seenVersionKey, PersistentDataType.STRING, latestVersion);
         player.openBook(book);
     }
 
-    private long getUpdatedAt(String version) {
-        String storageKey = findStorageKey(version);
-        if (storageKey == null) {
-            return 0L;
-        }
-        return changelogs.getLong("changelogs." + storageKey + ".updated-at", 0L);
+    private String getSeenVersion(Player player) {
+        return player.getPersistentDataContainer().get(seenVersionKey, PersistentDataType.STRING);
     }
 
     public boolean hasChangelogVersion(String version) {
@@ -198,7 +214,7 @@ public final class ChangelogManager {
                 "SV Versión: " + version,
                 "MC Versión: " + minecraftVersion,
                 "",
-                "Novedades:",
+                "Novedades de la versión " + version + ":",
                 "",
                 "- Escribe aquí los cambios...");
         return Collections.singletonList(template);
